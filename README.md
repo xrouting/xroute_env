@@ -15,6 +15,9 @@ Then, put the simulator in the `third_party/openroad` folder.
 
 ### Launch Algorithm Backend
 
+[DQN](./baseline/DQN/README.md)
+
+[PPO](./baseline/DQN/PPO.md)
 
 ### Launch Simulator
 
