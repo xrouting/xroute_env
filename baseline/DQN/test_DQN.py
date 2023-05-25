@@ -92,5 +92,9 @@ def test(checkpoint_path,port=None,device=None):
 if __name__ == '__main__':
     port = sys.argv[1]
     device = sys.argv[2]
+    try:
+        pretrained_path = sys.argv[3]
+    except Exception as e:
+        pretrained_path = 'results/2023-05-10--11-06-26/DQN_routing.pth'
     print(f'port:{port},device:{device}')
-    test(checkpoint_path='results/2023-05-10--11-06-26/DQN_routing.pth',port=port,device=device)
+    test(checkpoint_path=pretrained_path,port=port,device=device)

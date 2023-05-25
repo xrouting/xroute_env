@@ -166,13 +166,17 @@ class Trainer:
 
 if __name__ == '__main__':
     device = sys.argv[1]
-    assert device in ['cpu','0','1']
+    try:
+        pretrained_path = sys.argv[2]
+    except IndexError as e:
+        pretrained_path = None
+    assert device in ['cpu','0','1','2','3']
     if device == 'cpu':
         device = torch.device(device)
     else:
         device = torch.device('cuda:'+device)    
     print(f'device={device}')
-    trainer = Trainer(max_training_episodes,pretrained_path='results/2023-05-10--11-06-26/DQN_routing.pth',device=device)
+    trainer = Trainer(max_training_episodes,pretrained_path=pretrained_path,device=device)
     try:
         trainer.train()
     except KeyboardInterrupt as e:
