@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 
-folder_path = './scripts'
+folder_path = 'scripts'
 
 # 删除 scripts 目录
 if os.path.exists(folder_path):

@@ -160,4 +160,5 @@ cython_debug/
 #.idea/
 
 .DS_Store
-examples/scripts
+.idea
+simulator/openroad*
