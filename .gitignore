@@ -162,4 +162,5 @@ cython_debug/
 .DS_Store
 .idea
 simulator/openroad*
-simulator/results
+simulator/testcases/**/*.tcl
+simulator/testcases/**/result

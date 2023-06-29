@@ -2,6 +2,10 @@ FROM openroad/ubuntu20.04-dev
 
 WORKDIR /app
 
+ARG TZ
+ENV TZ=$TZ
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get -y update && apt-get -y install \
     python3-pip \
     libprotobuf-dev  \
@@ -33,6 +37,7 @@ RUN pip install fastapi==0.97.0
 RUN pip install uvicorn==0.22.0
 RUN pip install pyzmq==25.1.0
 RUN pip install orjson==3.9.1
+RUN pip install jinja2==3.1.2
 
 RUN printf '#!/bin/bash\n[ -f /app/start_container ] && /app/start_container || /bin/bash' > /usr/bin/entrypoint
 RUN chmod +x /usr/bin/entrypoint

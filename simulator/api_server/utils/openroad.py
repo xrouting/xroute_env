@@ -1,115 +1,104 @@
 import multiprocessing
 import os
-
-import drt
-
-from openroad import Design, Tech, set_thread_count
-
-
-def detailed_route(design, *,
-                   output_maze="",
-                   output_drc="",
-                   output_cmap="",
-                   output_guide_coverage="",
-                   db_process_node="",
-                   disable_via_gen=False,
-                   droute_end_iter=-1,
-                   via_in_pin_bottom_layer="",
-                   via_in_pin_top_layer="",
-                   or_seed=-1,
-                   or_k=0,
-                   bottom_routing_layer="",
-                   top_routing_layer="",
-                   verbose=0,
-                   clean_patches=False,
-                   no_pin_access=False,
-                   single_step_dr=False,
-                   min_access_points=-1,
-                   save_guide_updates=False):
-    params = drt.ParamStruct()
-    params.outputMazeFile = output_maze
-    params.outputDrcFile = output_drc
-    params.outputCmapFile = output_cmap
-    params.outputGuideCoverageFile = output_guide_coverage
-    params.dbProcessNode = db_process_node
-    params.enableViaGen = not disable_via_gen
-    params.drouteEndIter = droute_end_iter
-    params.viaInPinBottomLayer = via_in_pin_bottom_layer
-    params.viaInPinTopLayer = via_in_pin_top_layer
-    params.orSeed = or_seed
-    params.orK = or_k
-    params.bottomRoutingLayer = bottom_routing_layer
-    params.topRoutingLayer = top_routing_layer
-    params.verbose = verbose
-    params.cleanPatches = clean_patches
-    params.doPa = not no_pin_access
-    params.singleStepDR = single_step_dr
-    params.minAccessPoints = min_access_points
-    params.saveGuideUpdates = save_guide_updates
-
-    router = design.getTritonRoute()
-    router.setParams(params)
-    router.main()
+import random
+import subprocess
+import threading
+import time
 
 
-def create_task(lef_file,
-                def_file,
-                guide_file,
-                output_drc=None,
-                output_maze=None,
-                output_def=None,
-                droute_end_iter=-1,
-                verbose=0):
-    tech = Tech()
-    tech.readLef(lef_file)
-    design = Design(tech)
-    design.readDef(def_file)
-    gr = design.getGlobalRouter()
-    gr.readGuides(guide_file)
+from jinja2 import Environment, FileSystemLoader
 
-    if output_drc is not None:
-        dir = output_drc.split(os.sep)[:-1]
-        dir = os.sep.join(dir)
-        if not os.path.exists(dir):
-            os.makedirs(dir, exist_ok=True)
+jinja_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
 
-    if output_maze is not None:
-        dir = output_maze.split(os.sep)[:-1]
-        dir = os.sep.join(dir)
-        if not os.path.exists(dir):
-            os.makedirs(dir, exist_ok=True)
-
-    set_thread_count(multiprocessing.cpu_count())
-
-    detailed_route(design,
-                   output_drc=output_drc,
-                   output_maze=output_maze,
-                   droute_end_iter=droute_end_iter,
-                   verbose=verbose)
-
-    # write def file
-    if output_def is not None:
-        dir = output_def.split(os.sep)[:-1]
-        dir = os.sep.join(dir)
-        if not os.path.exists(dir):
-            os.makedirs(dir, exist_ok=True)
-
-        design.writeDef(output_def)
+subprocesses = {}
 
 
-def create_task_by_testcase_name(name, droute_end_iter=-1, verbose=0):
-    lef_file = os.path.join(os.sep, 'app', 'testcases', name, f'{name}.input.lef')
-    def_file = os.path.join(os.sep, 'app', 'testcases', name, f'{name}.input.def')
-    guide_file = os.path.join(os.sep, 'app', 'testcases', name, f'{name}.input.guide')
-    output_drc = os.path.join(os.sep, 'app', 'results', name, f'{name}.output.drc.rpt')
-    output_maze = os.path.join(os.sep, 'app', 'results', name, f'{name}.output.maze.log')
-    output_def = os.path.join(os.sep, 'app', 'results', name, f'{name}.output.def')
+class OpenRoadTask(threading.Thread):
+    def __init__(self,
+                 task_mode='evaluation',
+                 task_timeout=86400 * 365,
+                 testcase_name='ispd18_sample',
+                 droute_end_iter=-1,
+                 verbose=1):
+        super().__init__()
+        self.setDaemon(True)
 
-    create_task(lef_file,
-                def_file,
-                guide_file,
-                output_drc,
-                output_maze,
-                output_def,
-                droute_end_iter=droute_end_iter,
-                verbose=verbose)
+        self.task_id = time.strftime("%y%m%d_%H%M%S", time.localtime(time.time())) + f'_{random.randint(0, 1000)}'
+        self.task_mode = task_mode
+        self.task_timeout = task_timeout
+        self.testcase_name = testcase_name
+        self.droute_end_iter = droute_end_iter
+        self.verbose = verbose
+
+        self.testcase_path = None
+        self.process = None
+
+    @property
+    def task_full_name(self):
+        return f'{self.testcase_name}_{self.task_mode}_{self.task_id}'
+
+    @property
+    def tcl_template_name(self):
+        template_map = {
+            'evaluation': 'normal',
+        }
+        return f'run.{template_map[self.task_mode]}.tcl'
+
+    @property
+    def tcl_file_name(self):
+        return f'{self.testcase_name}.{self.tcl_template_name}'
+
+    @property
+    def result_path(self):
+        return os.path.join(self.testcase_path, f'result_{self.task_mode}_{self.task_id}')
+
+    def generate_script(self):
+        self.testcase_path = os.path.join(os.sep, 'app', 'testcases', self.testcase_name)
+
+        if not os.path.exists(self.testcase_path):
+            raise FileNotFoundError(f'{self.testcase_path} not found, please check your testcase name.')
+
+        input_lef = os.path.join(self.testcase_path, f'{self.testcase_name}.input.lef')
+        input_def = os.path.join(self.testcase_path, f'{self.testcase_name}.input.def')
+        input_guides = os.path.join(self.testcase_path, f'{self.testcase_name}.input.guide')
+
+        if not os.path.exists(self.result_path):
+            os.makedirs(self.result_path, exist_ok=True)
+
+        output_drc = os.path.join(self.result_path, f'{self.testcase_name}.output.drc.rpt')
+        output_def = os.path.join(self.result_path, f'{self.testcase_name}.output.def')
+
+        template = jinja_env.get_template(self.tcl_template_name)
+        script = template.render(thread_count=multiprocessing.cpu_count(),
+                                 input_lef=input_lef,
+                                 input_def=input_def,
+                                 input_guides=input_guides,
+                                 output_drc=output_drc,
+                                 output_def=output_def,
+                                 droute_end_iter=self.droute_end_iter,
+                                 verbose=self.verbose)
+
+        with open(os.path.join(self.result_path, self.tcl_file_name), 'w') as f:
+            f.write(script)
+
+    def run(self):
+        self.generate_script()
+
+        tcl_path = os.path.join(self.result_path, self.tcl_file_name)
+        log_path = os.path.join(self.result_path, f'{self.testcase_name}.output.log')
+
+        with open(log_path, 'w') as f:
+            self.process = subprocess.Popen(['openroad', '-exit', tcl_path],
+                                       stdout=f,
+                                       stderr=f)
+
+            self.process.wait(self.task_timeout)
+
+            # TODO: handle different type of error
+            if self.process.returncode == 0:
+                print(f'Task [{self.task_full_name}] finished successfully.')
+            else:
+                print(f'Task [{self.task_full_name}] failed.')
+
+    def terminate(self):
+        self.process.terminate()
