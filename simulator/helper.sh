@@ -6,32 +6,58 @@ _help() {
     cat <<EOF
 
 USAGE: $0
-    -b, --build      Builds the simulator image.
-    -l, --launch     Launches the simulator container.
-    -i, --inspect    Inspects the simulator container.
-    --bash           Launches the simulator container with bash.
+    -s, --start      Starts the simulator.
+    -e, --enter      Enter the simulator container with bash.
+    -k, --kill       Kills the simulator container.
+    -l, --log        Shows the simulator logs.
+    --build          Builds the simulator image.
+    --compile=PATH   Compiles the OpenROAD executable.
+    --bash           Launches the simulator with bash.
+    --dev            Launches the simulator with dev mode.
 EOF
     exit "${1:-1}"
 }
 
 case "${1}" in
-    -b|--build)
+    -s|--start)
+        docker run -d --rm -v $PWD:/app -w /app -p 8080:8080 xplanlab/xroute-env /app/start_container
+        ;;
+
+    -e|--enter)
+        docker exec -it $(docker ps | grep xroute-env | awk '{print  $1}') /bin/bash
+        ;;
+
+    -k|--kill)
+        docker kill $(docker ps | grep xroute-env | awk '{print  $1}')
+        ;;
+
+    -l|--log)
+        docker logs -f $(docker ps | grep xroute-env | awk '{print  $1}')
+        ;;
+
+    --build)
         if [[ -z "$TIME_ZONE" ]]; then
             TIME_ZONE="Etc/UTC"
         fi
         docker build --build-arg TZ="$TIME_ZONE" -t xplanlab/xroute-env . && docker image prune -f
         ;;
 
-    -l|--launch)
-        docker run -it --rm -v $PWD:/app -w /app -p 8080:8080 xplanlab/xroute-env
-        ;;
-
-    -i|--inspect)
-        docker exec -it $(docker ps | grep xroute-env | awk '{print  $1}') /bin/bash
+    --compile=*)
+        OPENROAD_PATH="$(echo $1 | sed -e 's/^[^=]*=//g')"
+        if [[ -z "$OPENROAD_PATH" ]]; then
+            echo "Please specify the path to OpenROAD."
+            exit 1
+        fi
+        docker run -it --rm -v $OPENROAD_PATH:/app -w /app xplanlab/xroute-env /bin/bash -c "\
+          cmake -B cmake-build-release-docker . && cmake --build cmake-build-release-docker -j \$(nproc)"
         ;;
 
     --bash)
         docker run -it --rm -v $PWD:/app -w /app -p 8080:8080 xplanlab/xroute-env /app/start_container --bash
+        ;;
+
+    --dev)
+        docker run -it --rm -v $PWD:/app -w /app -p 8080:8080 xplanlab/xroute-env /app/start_container --dev
         ;;
 
     *)

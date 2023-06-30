@@ -32,12 +32,16 @@ if [ ! -f /usr/bin/openroad ]; then
 fi
 
 bash_mode=false
+dev_mode=false
 
 # Parse command arguments
 while [ "$#" -gt 0 ]; do
     case "${1}" in
-        -b|--bash)
+        --bash)
             bash_mode=true
+            ;;
+        --dev)
+            dev_mode=true
             ;;
         *)
             echo "unknown option: ${1}" >&2
@@ -50,5 +54,5 @@ done
 if [[ $bash_mode == "true" ]]; then
   exec /bin/bash
 else
-  python3 -m uvicorn api_server.main:app --host 0.0.0.0 --port 8080 --reload
+  python3 -m uvicorn api_server.main:app --host 0.0.0.0 --port 8080 $([[ $dev_mode == "true" ]] && echo "--reload")
 fi
