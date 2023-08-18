@@ -35,5 +35,5 @@ worker_num: the number of worker instances.
 ### TODO List
 
 - [ ] Auto download ispd testcases
-- [ ] Support distributed routing in one server
+- [ ] Support distributed routing on one server
 

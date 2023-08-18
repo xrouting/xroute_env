@@ -6,7 +6,7 @@ read_guides {{input_guides}}
 
 detailed_route_debug \
         {%- if custom_strategies %}
-        -custom_strategies
+        -custom_strategies \
         -custom_size {{custom_size}} \
         -custom_offset {{custom_offset}} \
         {%- endif %}

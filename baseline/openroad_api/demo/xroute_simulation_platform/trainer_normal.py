@@ -23,7 +23,6 @@ def launch_openroad():
 
     process = subprocess.Popen([f'{executable_path}/openroad', '-exit',
                                 '/home/plan/eda/OpenROAD/src/drt/test/results/ispd18_test1/run-net-ordering-train.tcl'],
-                                # '/Users/matts8023/Home/Career/SYSU/eda/OpenROAD_Local/src/drt/test/results/ispd18_test1/run-debug-worker.tcl'],
                                cwd=executable_path,
                                stdout=subprocess.PIPE)
 
