@@ -41,17 +41,3 @@ worker_num: the number of worker instances.
 
 The routing simulator in xroute environment is mainly based on [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) TritonRoute. Thanks for their wonderful work!
 
-### Citations
-
-Please cite the paper and star this repo if you use xroute environment or find it interesting/useful, thanks! Feel free to open an issue if you have any questions.
-
-```
-@misc{zhou2023xroute,
-      title={XRoute Environment: A Novel Reinforcement Learning Environment for Routing}, 
-      author={Zhanwen Zhou and Hankz Hankui Zhuo and Xiaowu Zhang and Qiyuan Deng},
-      year={2023},
-      eprint={2305.13823},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI}
-}
-```
