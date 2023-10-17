@@ -37,3 +37,7 @@ worker_num: the number of worker instances.
 - [ ] Auto download ispd testcases
 - [ ] Support distributed routing on one server
 
+### Acknowledgement
+
+The routing simulator in xroute environment is mainly based on [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) TritonRoute. Thanks for their wonderful work!
+
