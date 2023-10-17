@@ -25,7 +25,7 @@ Run the following command to get launch script:
 
 ```bash
 cd examples
-python3 init.py [start_port][worker_num]
+python3 launch.py [start_port][worker_num]
 ```
 
 start_port: the listen port number of the first worker instance.

@@ -6,14 +6,14 @@ _help() {
     cat <<EOF
 
 USAGE: $0
-    -s, --start      Starts the simulator.
+    -s, --start      Start the simulator.
     -e, --enter      Enter the simulator container with bash.
-    -k, --kill       Kills the simulator container.
-    -l, --log        Shows the simulator logs.
-    --build          Builds the simulator image.
-    --compile=PATH   Compiles the OpenROAD executable.
-    --bash           Launches the simulator with bash.
-    --dev            Launches the simulator with dev mode.
+    -k, --kill       Kill the simulator container.
+    -l, --log        Show the simulator logs.
+    --build          Build the simulator image.
+    --compile=PATH   Compile the OpenROAD executable.
+    --bash           Launch the simulator with bash.
+    --dev            Launch the simulator with dev mode.
 EOF
     exit "${1:-1}"
 }
