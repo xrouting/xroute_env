@@ -1,5 +1,5 @@
-# xroute_env
-RL environment for detailed routing.
+# XRoute Environment
+XRoute Environment, standing for self-learning (denoted by X) for detailed routing (denoted by Route), is a novel reinforcement learning environment to train agents to order and route all nets in various challenging testcases efficiently and effectively, and present the routing results in varying dashboards.
 
 ## Quickstart
 
