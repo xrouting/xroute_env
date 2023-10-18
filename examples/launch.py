@@ -18,7 +18,7 @@ os.makedirs(folder_path + '/results', exist_ok=True)
 # 生成脚本
 
 worker_template = '''set_thread_count 1
-detailed_route_debug -custom_strategies -custom_size 1 -custom_offset 0 -net_ordering_use_api -api_host 127.0.0.1:{api_port}
+detailed_route_debug -custom_strategies -custom_size 1 -custom_offset 0 -net_ordering_use_api -api_host 127.0.0.1:{api_port} -api_timeout 600000
 run_worker -host 127.0.0.1 -port {worker_port}
 '''
 balancer_template = 'add_worker_address -host 127.0.0.1 -port {worker_port}'
