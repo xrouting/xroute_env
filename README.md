@@ -13,8 +13,6 @@ To interact with the xroute environment, you need to download the simulator firs
 
 Then, put the simulator in the `third_party/openroad` folder.
 
-Before launching this executable, you need to install some dependency libraries. Execute the following command to do so.
-
 You may also need to execute the following command to install some libraries to ensure that OpenRoad can start up properly.
 
 ```bash
