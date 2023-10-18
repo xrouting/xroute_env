@@ -1,5 +1,6 @@
 import os
 import shutil
+import subprocess
 import sys
 
 folder_path = './scripts'
@@ -107,3 +108,6 @@ with open(monitor_path, 'w') as f:
     f.write(monitor_content)
 
 os.chmod(monitor_path, 0o755)
+
+# 启动脚本
+subprocess.call(f'cd {folder_path} && ./launcher.sh', shell=True)
