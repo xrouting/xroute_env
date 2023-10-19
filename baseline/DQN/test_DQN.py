@@ -90,8 +90,8 @@ def test(checkpoint_path,port=None,device=None):
 
 
 if __name__ == '__main__':
-    port = sys.argv[1]
-    device = sys.argv[2]
+    device = sys.argv[1]
+    port = sys.argv[2]
     try:
         pretrained_path = sys.argv[3]
     except Exception as e:
