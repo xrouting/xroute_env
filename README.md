@@ -21,7 +21,7 @@ chmod +x DependencyInstaller.sh
 source ./DependencyInstaller.sh
 ```
 
-### Launch Agent
+### Agent Introduction
 
 [DQN](./baseline/DQN/README.md)
 
