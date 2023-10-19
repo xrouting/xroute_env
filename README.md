@@ -36,8 +36,7 @@ You can choose to launch the simulator in following modes:
 In this mode, the simulator should launch first, then the agent can control the simulator to train the model.
 
 ```bash
-# Use screen to run the simulator in the background
-screen -dm python3 examples/launch_training.py
+python3 examples/launch_training.py
 
 python3 baseline/DQN/train_DQN.py cpu
 ```
@@ -49,8 +48,7 @@ After executing the command above, the simulator will listen to the port 6667 to
 In this mode, the agent should launch first, then the simulator can connect to the agent to get the action.
 
 ```bash
-# Use screen to run the agent in the background
-screen -dm python3 baseline/DQN/test_DQN.py cpu
+python3 baseline/DQN/test_DQN.py cpu
 
 python3 examples/launch_inference.py
 ```
