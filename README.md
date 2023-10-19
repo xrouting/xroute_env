@@ -36,10 +36,10 @@ You can choose to launch the simulator in following modes:
 In this mode, the simulator should launch first, then the agent can control the simulator to train the model.
 
 ```bash
-python3 examples/launch_training.py
+cd examples && python3 launch_training.py
 
-python3 baseline/DQN/train_DQN.py cpu
-# python3 baseline/PPO/train_PPO.py cpu
+cd baseline/DQN && python3 train_DQN.py cpu
+# cd baseline/PPO && python3 train_PPO.py cpu
 ```
 
 After executing the command above, the simulator will listen to the port 6667 to wait for environment reset command, and then interact with the agent via port 5556.
@@ -49,10 +49,10 @@ After executing the command above, the simulator will listen to the port 6667 to
 In this mode, the agent should launch first, then the simulator can connect to the agent to get the action.
 
 ```bash
-python3 baseline/DQN/test_DQN.py cpu 5556
-# python3 baseline/PPO/test_PPO.py cpu 5556
+cd baseline/DQN && python3 test_DQN.py cpu 5556
+# cd baseline/PPO && python3 test_PPO.py cpu 5556
 
-python3 examples/launch_inference.py 5556
+cd examples && python3 launch_inference.py 5556
 ```
 
 ### TODO List
