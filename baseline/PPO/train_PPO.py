@@ -2,7 +2,7 @@
 import datetime
 import pathlib
 import sys
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[2])) 
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1])) 
 import torch
 from torch.utils.tensorboard import SummaryWriter
 results_path = pathlib.Path(__file__).resolve().parents[0] / "results" / datetime.datetime.now().strftime(

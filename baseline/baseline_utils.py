@@ -22,12 +22,13 @@ def handle_messange(message,socket):
 
         for node in req.nodes:
             node_type = 0
-            if node.type == net_ordering.ACCESS:
+            if node.type == net_ordering.NodeType.ACCESS:
                 node_type = node.net + 1  # 在 XRoute 中，net 是从 1 开始的
-            elif node.type == net_ordering.BLOCKAGE:
+            elif node.type == net_ordering.NodeType.BLOCKAGE:
                 node_type = -1
 
             node_pin = -1
+            #if node.type == net_ordering.NodeType.ACCESS:
             if node.type == net_ordering.NodeType.ACCESS:
                 node_pin = node.pin + 1  # 在 XRoute 中，pin 是从 1 开始的
 
@@ -397,6 +398,7 @@ class Game:
         Returns:
             The new observation, the reward and a boolean if the game has ended.
         """        
+        print(f'action={action}')
         done = False
         observation = None
         #发送action
@@ -475,5 +477,6 @@ class Game:
             else:
                 #如果当前是没有待布网络的GCell，则继续接收下一个GCell
                 reset_try_time += 1
+        print(f'self.observation.shape:{self.observation.shape}')
         return self.observation,reset_try_time
 
