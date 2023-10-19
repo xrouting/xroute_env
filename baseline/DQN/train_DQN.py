@@ -76,6 +76,7 @@ class Trainer:
             assert num_episode >= 1
             print(f'num_episode={num_episode},max_training_episodes={self.max_training_episodes}')                
             # 每个回合开始前重置环境
+            print(f'begin reset')
             state,reset_try_time = game.reset()
             print('--------------')
             print(f'type(state):{type(state)}')
@@ -165,17 +166,19 @@ class Trainer:
         print("============================================================================================")
 
 if __name__ == '__main__':
-    device = sys.argv[1]
     try:
         pretrained_path = sys.argv[2]
     except IndexError as e:
         pretrained_path = None
-    assert device in ['cpu','0','1','2','3']
-    if device == 'cpu':
-        device = torch.device(device)
-    else:
-        device = torch.device('cuda:'+device)    
-    print(f'device={device}')
+    try:
+        device = sys.argv[1]
+        assert device in ['cpu','0','1','2','3']
+        if device == 'cpu':
+            device = torch.device(device)
+        else:
+            device = torch.device('cuda:'+device)    
+    except Exception as e:
+        device = torch.device('cpu')
     trainer = Trainer(max_training_episodes,pretrained_path=pretrained_path,device=device)
     try:
         trainer.train()
