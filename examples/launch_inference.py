@@ -3,7 +3,7 @@ import shutil
 import subprocess
 import sys
 
-folder_path = './scripts'
+folder_path = './examples/scripts'
 
 # 删除 scripts 目录
 if os.path.exists(folder_path):

@@ -10,7 +10,7 @@ import time
 
 import zmq
 
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../baseline/openroad_api"))
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "baseline/openroad_api"))
 sys.path.append(parent_dir)
 
 context = zmq.Context()
@@ -19,9 +19,9 @@ socket.bind('tcp://*:6667')
 
 process = None
 
-executable_path = os.path.abspath(os.path.join(os.getcwd(), '../third_party/openroad'))
-shell_script_path = os.path.abspath(os.path.join(os.getcwd(), f'../ispd/ispd18_test1/run-net-ordering-training.tcl'))
-dump_workers_path = os.path.abspath(os.path.join(os.getcwd(), f'../ispd/ispd18_test1/dump'))
+executable_path = os.path.abspath(os.path.join(os.getcwd(), 'third_party/openroad'))
+shell_script_path = os.path.abspath(os.path.join(os.getcwd(), f'ispd/ispd18_test1/run-net-ordering-training.tcl'))
+dump_workers_path = os.path.abspath(os.path.join(os.getcwd(), f'ispd/ispd18_test1/dump'))
 dir_items = os.listdir(dump_workers_path)
 worker_dir_names = [name for name in dir_items if name.startswith("workerx")]
 
