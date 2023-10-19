@@ -25,8 +25,8 @@ balancer_template = 'add_worker_address -host 127.0.0.1 -port {worker_port}'
 leader_launch_template = 'set worker{i} [exec $OR worker{i}.tcl > logs/worker{i}.log &]'
 leader_terminate_template = 'exec kill $worker{i}'
 
-api_port_start = int(sys.argv[1])
-worker_count = int(sys.argv[2])
+api_port_start = 5556
+worker_count = 1
 worker_port_start = 8800
 
 balancer_content = ''
