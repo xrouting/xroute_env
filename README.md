@@ -39,6 +39,7 @@ In this mode, the simulator should launch first, then the agent can control the 
 python3 examples/launch_training.py
 
 python3 baseline/DQN/train_DQN.py cpu
+# python3 baseline/PPO/train_PPO.py cpu
 ```
 
 After executing the command above, the simulator will listen to the port 6667 to wait for environment reset command, and then interact with the agent via port 5556.
@@ -48,9 +49,10 @@ After executing the command above, the simulator will listen to the port 6667 to
 In this mode, the agent should launch first, then the simulator can connect to the agent to get the action.
 
 ```bash
-python3 baseline/DQN/test_DQN.py cpu
+python3 baseline/DQN/test_DQN.py cpu 5556
+# python3 baseline/PPO/test_PPO.py cpu 5556
 
-python3 examples/launch_inference.py
+python3 examples/launch_inference.py 5556
 ```
 
 ### TODO List
