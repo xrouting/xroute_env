@@ -3,6 +3,8 @@ follow https://arxiv.org/pdf/1707.06347.pdf
 #1.train PPO
 python train_DQN.py GPU_id [pretrained_path]    #The GPU_id value should be one of ['cpu','0','1','2','3']
 
+model checkpoint path:baseline/DQN/results
+
 ----Communication setting
 see ../baseline_utils.py class Game
 
