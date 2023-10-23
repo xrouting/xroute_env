@@ -110,7 +110,7 @@ class ActorCritic(nn.Module):
                 for j in range(len(logits)):
                     tmp_logits = logits[j]
                     policy[netOrder[j]] = tmp_logits
-                policy = sorted(policy.items(),key=lambda x:x[1],reverse=False)
+                policy = sorted(policy.items(),key=lambda x:x[1],reverse=True)
                 policy_list.append(policy)         
         else:
             print(f'inf get_policy_from function,len(action_mapping_list) is 0')

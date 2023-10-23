@@ -131,7 +131,7 @@ class DQN:
                 for j in range(len(logits)):
                     tmp_logits = logits[j]
                     policy[netOrder[j]] = tmp_logits
-                policy = sorted(policy.items(),key=lambda x:x[1],reverse=False)
+                policy = sorted(policy.items(),key=lambda x:x[1],reverse=True)
                 policy_list.append(policy) 
         return policy_list 
 
