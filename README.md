@@ -21,24 +21,39 @@ chmod +x DependencyInstaller.sh
 source ./DependencyInstaller.sh
 ```
 
-### Launch Agent
+### Agent Introduction
 
 [DQN](./baseline/DQN/README.md)
 
 [PPO](./baseline/DQN/PPO.md)
 
-### Launch Simulator
+### Launch Mode
 
-Run the following command to get launch script:
+You can choose to launch the simulator in following modes:
+
+#### Training Mode
+
+In this mode, the simulator should launch first, then the agent can control the simulator to train the model.
 
 ```bash
-cd examples
-python3 launch.py [start_port][worker_num]
+cd examples && python3 launch_training.py
+
+cd baseline/DQN && python3 train_DQN.py cpu
+# cd baseline/PPO && python3 train_PPO.py cpu
 ```
 
-start_port: the listen port number of the first worker instance.
+After executing the command above, the simulator will listen to the port 6667 to wait for environment reset command, and then interact with the agent via port 5556.
 
-worker_num: the number of worker instances.
+#### Evaluation Mode
+
+In this mode, the agent should launch first, then the simulator can connect to the agent to get the action.
+
+```bash
+cd baseline/DQN && python3 test_DQN.py cpu 5556
+# cd baseline/PPO && python3 test_PPO.py cpu 5556
+
+cd examples && python3 launch_evaluation.py 5556
+```
 
 ### TODO List
 
@@ -48,4 +63,3 @@ worker_num: the number of worker instances.
 ### Acknowledgement
 
 The routing simulator in xroute environment is mainly based on [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD) TritonRoute. Thanks for their wonderful work!
-
