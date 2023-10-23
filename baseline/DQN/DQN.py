@@ -144,7 +144,7 @@ class DQN:
 
         # 如果小于该值就取最大的值对应的索引
         if np.random.random() < self.epsilon:
-            action = policy_list[-1][0]
+            action = policy_list[0][0]
         # 如果大于该值就随机探索
         else:
             # 随机选择一个动作
