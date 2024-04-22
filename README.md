@@ -25,7 +25,7 @@ source ./DependencyInstaller.sh
 
 [DQN](./baseline/DQN/README.md)
 
-[PPO](./baseline/DQN/PPO.md)
+[PPO](./baseline/PPO/README.md)
 
 ### Launch Mode
 
