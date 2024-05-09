@@ -54,8 +54,8 @@ def test(checkpoint_path,port=None,device=None):
         data = handle_messange(message,socket)
         import json
         json_str = json.dumps(data)
-        with open('./test.json','w',encoding='utf-8') as f:
-            f.write(json_str)
+        # with open('./test.json','w',encoding='utf-8') as f:
+        #     f.write(json_str)
 
         #把初始环境构建成3D网格
         routed_nets = set()

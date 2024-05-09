@@ -1,12 +1,32 @@
-nohup python test_DQN.py 6654 0 > log6654.txt &
-nohup python test_DQN.py 6655 0 > log6655.txt &
-nohup python test_DQN.py 6656 0 > log6656.txt &
-nohup python test_DQN.py 6657 0 > log6657.txt &
-nohup python test_DQN.py 6658 0 > log6658.txt &
-nohup python test_DQN.py 6659 0 > log6659.txt &
-nohup python test_DQN.py 6660 1 > log6660.txt &
-nohup python test_DQN.py 6661 1 > log6661.txt &
-nohup python test_DQN.py 6662 1 > log6662.txt &
-nohup python test_DQN.py 6663 1 > log6663.txt &
-nohup python test_DQN.py 6664 1 > log6664.txt &
-nohup python test_DQN.py 6665 1 > log6665.txt &
+nohup python test_DQN.py 0 23330 > logs/23330.txt 2>&1 &
+nohup python test_DQN.py 0 23331 > logs/23331.txt 2>&1 &
+nohup python test_DQN.py 0 23332 > logs/23332.txt 2>&1 &
+nohup python test_DQN.py 0 23333 > logs/23333.txt 2>&1 &
+nohup python test_DQN.py 0 23334 > logs/23334.txt 2>&1 &
+nohup python test_DQN.py 0 23335 > logs/23335.txt 2>&1 &
+nohup python test_DQN.py 0 23336 > logs/23336.txt 2>&1 &
+nohup python test_DQN.py 0 23337 > logs/23337.txt 2>&1 &
+nohup python test_DQN.py 0 23338 > logs/23338.txt 2>&1 &
+nohup python test_DQN.py 0 23339 > logs/23339.txt 2>&1 &
+nohup python test_DQN.py 0 23340 > logs/23340.txt 2>&1 &
+nohup python test_DQN.py 0 23341 > logs/23341.txt 2>&1 &
+nohup python test_DQN.py 0 23342 > logs/23342.txt 2>&1 &
+nohup python test_DQN.py 0 23343 > logs/23343.txt 2>&1 &
+nohup python test_DQN.py 0 23344 > logs/23344.txt 2>&1 &
+nohup python test_DQN.py 0 23345 > logs/23345.txt 2>&1 &
+nohup python test_DQN.py 0 23346 > logs/23346.txt 2>&1 &
+nohup python test_DQN.py 0 23347 > logs/23347.txt 2>&1 &
+nohup python test_DQN.py 0 23348 > logs/23348.txt 2>&1 &
+nohup python test_DQN.py 0 23349 > logs/23349.txt 2>&1 &
+nohup python test_DQN.py 0 23350 > logs/23350.txt 2>&1 &
+nohup python test_DQN.py 0 23351 > logs/23351.txt 2>&1 &
+nohup python test_DQN.py 0 23352 > logs/23352.txt 2>&1 &
+nohup python test_DQN.py 0 23353 > logs/23353.txt 2>&1 &
+nohup python test_DQN.py 0 23354 > logs/23354.txt 2>&1 &
+nohup python test_DQN.py 0 23355 > logs/23355.txt 2>&1 &
+nohup python test_DQN.py 0 23356 > logs/23356.txt 2>&1 &
+nohup python test_DQN.py 0 23357 > logs/23357.txt 2>&1 &
+nohup python test_DQN.py 0 23358 > logs/23358.txt 2>&1 &
+nohup python test_DQN.py 0 23359 > logs/23359.txt 2>&1 &
+nohup python test_DQN.py 0 23360 > logs/23360.txt 2>&1 &
+nohup python test_DQN.py 0 23361 > logs/23361.txt 2>&1 &

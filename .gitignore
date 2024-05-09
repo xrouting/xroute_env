@@ -1,6 +1,3 @@
-examples/scripts/
-openroad
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -164,6 +161,19 @@ cython_debug/
 
 .DS_Store
 .idea
+
+# VScode
+.vscode/
+
+
+# Compiled binary executables
+examples/scripts/
+examples/*debug*/
+examples/*distribution*/
+openroad
+
 simulator/openroad*
 simulator/testcases/**/*.tcl
 simulator/testcases/**/result
+baseline/DQN/logs
+baseline/PPO/logs
