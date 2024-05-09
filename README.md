@@ -9,7 +9,7 @@ To interact with the xroute environment, you need to download the simulator firs
 
 | Operating System | Download Link |
 | --- | --- |
-| Ubuntu 22.04 | [Download](https://github.com/xplanlab/OpenROAD/releases/tag/v0.0.1) |
+| Ubuntu 22.04 | [Download](https://drive.google.com/file/d/1-Zxd0HiOHclNtwCON5wOM78eCzsPrOBB/view?usp=sharing) |
 
 Then, put the simulator in the `third_party/openroad` folder.
 
@@ -25,7 +25,7 @@ source ./DependencyInstaller.sh
 
 [DQN](./baseline/DQN/README.md)
 
-[PPO](./baseline/DQN/PPO.md)
+[PPO](./baseline/PPO/README.md)
 
 ### Launch Mode
 

@@ -1,9 +1,9 @@
-follow https://arxiv.org/pdf/1707.06347.pdf
+The baseline PPO algorithm follows the original paper in https://arxiv.org/pdf/1707.06347.pdf
 
 #1.train PPO
-python train_DQN.py GPU_id [pretrained_path]    #The GPU_id value should be one of ['cpu','0','1','2','3']
+python train_PPO.py GPU_id [pretrained_path]    #The GPU_id value should be one of ['cpu','0','1','2','3']
 
-model checkpoint path:baseline/DQN/results
+model checkpoint path:baseline/PPO/results
 
 ----Communication setting
 see ../baseline_utils.py class Game
@@ -33,7 +33,7 @@ message_raw = self.socket.recv()
 
 #2.test PPO
 #Method 1
-python test_DQN.py GPU_id PORT [pretrained_path]
+python test_PPO.py GPU_id PORT [pretrained_path]
 
 
 #method 2
