@@ -56,40 +56,32 @@ def getObstaclesAndAccessPoints(data,routed_nets,bool_inference):
     return obstacles,accessPoints
 
 
-def _get_adjacent_point(vertex,direction,grid_length,grid_width,grid_height):
-    assert direction in ('east','west','south','north','up','down')
+def _get_adjacent_point(vertex, direction, grid_length, grid_width, grid_height):
+    assert direction in ('east', 'west', 'south', 'north', 'up', 'down')
     if direction == 'west':
         if vertex[0] == 0:
             return -1
-        else:
-            return (vertex[0] - 1,vertex[1],vertex[2])
+        return (vertex[0] - 1, vertex[1], vertex[2])
     if direction == 'east':
         if vertex[0] == grid_length - 1:
             return -1
-        else:
-            return (vertex[0] + 1,vertex[1],vertex[2] )
-
+        return (vertex[0] + 1, vertex[1], vertex[2])
     if direction == 'south':
         if vertex[1] == 0:
             return -1
-        else:
-            return (vertex[0],vertex[1]-1,vertex[2])
+        return (vertex[0], vertex[1] - 1, vertex[2])
     if direction == 'north':
         if vertex[1] == grid_width - 1:
             return -1
-        else:
-            return (vertex[0],vertex[1]+1,vertex[2] )
-
+        return (vertex[0], vertex[1] + 1, vertex[2])
     if direction == 'down':
         if vertex[2] == 0:
             return -1
-        else:
-            return (vertex[0],vertex[1],vertex[2]-1)
+        return (vertex[0], vertex[1], vertex[2] - 1)
     if direction == 'up':
         if vertex[2] == grid_height - 1:
             return -1
-        else:
-            return (vertex[0],vertex[1],vertex[2]+1)
+        return (vertex[0], vertex[1], vertex[2] + 1)
 
 def getObstacleGrid(obstacles,grid_dim):
     grid = []
