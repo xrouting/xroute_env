@@ -198,12 +198,11 @@ def clip(matrix=torch.randn([5,10,30]),standard=[15,15],kernel_size=3,out_channe
             array.append(padding(matrix=conv_res[i,:,:,:],standard=standard))
         res = torch.concat(array,axis=0).reshape([matrix_shape[0],out_channels if out_channels else in_channels,standard[0],standard[1]])
         return res,stride,res.shape
-
-    else:
-        for i in range(conv_res.shape[0]):
-            array.append(padding(matrix=conv_res[i,:,:,:,:],standard=standard))
-        res = torch.concat(array,axis=0).reshape([matrix_shape[0],out_channels if out_channels else in_channels,standard[0],standard[1],standard[2]])     
-        return res,stride,res.shape
+    
+    for i in range(conv_res.shape[0]):
+        array.append(padding(matrix=conv_res[i,:,:,:,:],standard=standard))
+    res = torch.concat(array,axis=0).reshape([matrix_shape[0],out_channels if out_channels else in_channels,standard[0],standard[1],standard[2]])     
+    return res,stride,res.shape
 
 # Residual block
 class ResidualBlock(torch.nn.Module):
