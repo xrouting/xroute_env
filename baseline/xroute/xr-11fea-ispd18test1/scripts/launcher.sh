@@ -1,0 +1,1 @@
+rm -rf logs/* && ../../../../../../../cmake-build-release/src/openroad -exit leader.tcl | tee logs/leader.log

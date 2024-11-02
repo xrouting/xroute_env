@@ -1,0 +1,17 @@
+add_worker_address -host 127.0.0.1 -port 10000
+add_worker_address -host 127.0.0.1 -port 10001
+add_worker_address -host 127.0.0.1 -port 10002
+add_worker_address -host 127.0.0.1 -port 10003
+add_worker_address -host 127.0.0.1 -port 10004
+add_worker_address -host 127.0.0.1 -port 10005
+add_worker_address -host 127.0.0.1 -port 10006
+add_worker_address -host 127.0.0.1 -port 10007
+add_worker_address -host 127.0.0.1 -port 10008
+add_worker_address -host 127.0.0.1 -port 10009
+add_worker_address -host 127.0.0.1 -port 10010
+add_worker_address -host 127.0.0.1 -port 10011
+add_worker_address -host 127.0.0.1 -port 10012
+add_worker_address -host 127.0.0.1 -port 10013
+add_worker_address -host 127.0.0.1 -port 10014
+add_worker_address -host 127.0.0.1 -port 10015
+run_load_balancer -host 127.0.0.1 -port 9998
