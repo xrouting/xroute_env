@@ -25,12 +25,12 @@ thread_exit = False
 testcase_name = 'ispd18_test1'
 clip_size = 7
 
-executable_path = os.path.abspath(os.path.join(os.getcwd(), '../../../../cmake-build-release/src'))
+executable_path = os.path.abspath(os.path.join(os.getcwd(), '../../../../cmake-build-release/src'))           # OpenROAD 可执行文件路径
 shell_script_path1 = os.path.abspath(os.path.join(os.getcwd(), f'../../../../src/drt/test/results/{testcase_name}/run-net-ordering-training.tcl'))
 shell_script_path2 = os.path.abspath(os.path.join(os.getcwd(), f'../../../../src/drt/test/results/{testcase_name}/run-net-ordering-training-xr.tcl'))
 
 dump_workers_path = f'/home/plan/eda/DumpWorkers/{testcase_name}/{clip_size}x{clip_size}'
-# dump_workers_path = '/Users/matts8023/Home/Career/SYSU/eda/OpenROAD_Local/cmake-build-release/src/ispd18_test1'
+
 dir_items = os.listdir(dump_workers_path)
 worker_dir_names = [name for name in dir_items if name.startswith("workerx")]
 

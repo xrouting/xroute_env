@@ -95,16 +95,16 @@ class Trainer:
 
 
 if __name__ == "__main__":
-    openroad_executable = '/Users/matts8023/Home/Career/SYSU/eda/OpenROAD_Local/cmake-build-release/src/openroad'
-    dump_dir = '/Users/matts8023/Home/Career/SYSU/eda/OpenROAD_Local/cmake-build-release/src/ispd18_test1'
+    openroad_executable = ''
+    dump_dir = ''
 
     if len(sys.argv) >= 3:
         port_control = int(sys.argv[1])
         port_to_alg = int(sys.argv[2])
 
         if len(sys.argv) == 4:
-            openroad_executable = '/home/plan/development/The-OpenROAD-Project/OpenROAD-ZXW/cmake-build-release/src/openroad'
-            dump_dir = '/home/plan/zhanwen/eda/DumpWorkers/ispd18_test1/7x7'
+            openroad_executable = ''
+            dump_dir = ''
         elif len(sys.argv) > 4:
             print('Wrong number of arguments.')
             exit(1)
