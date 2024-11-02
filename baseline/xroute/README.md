@@ -34,7 +34,7 @@ cd xroute_env/baseline/xroute/xr-11fea-ispd18test1
 Set the path correctly in `init.py`.
 
 ```
-python init.py Port number_of_threads
+python init.py port num_of_threads
 cd scripts && ./launcher.sh
 ```
 
