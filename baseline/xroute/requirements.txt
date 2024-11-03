@@ -1,0 +1,13 @@
+nevergrad
+numpy
+ray[default]
+seaborn
+tensorboard
+torch
+torch_geometric
+matplotlib
+graphviz
+pyzmq
+aiohttp==3.7.4
+protobuf==3.20.3
+# pydantic<2

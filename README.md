@@ -27,19 +27,24 @@ source ./DependencyInstaller.sh
 
 [PPO](./baseline/PPO/README.md)
 
+[A3C](./baseline/A3C/README.md)
+
+[MCTS](./baseline/xroute/README.md)
+
 ### Launch Mode
 
 You can choose to launch the simulator in following modes:
 
 #### Training Mode
 
-In this mode, the simulator should launch first, then the agent can control the simulator to train the model.
+In this mode, the simulator should launch first, then the agent can control the simulator to train the model.(The usage of xroute can be found in the README.md under the xroute directory.)
 
 ```bash
 cd examples && python3 launch_training.py
 
 cd baseline/DQN && python3 train_DQN.py cpu
 # cd baseline/PPO && python3 train_PPO.py cpu
+# cd baseline/A3C && python discrete_A3C.py
 ```
 
 After executing the command above, the simulator will listen to the port 6667 to wait for environment reset command, and then interact with the agent via port 5556.
@@ -51,14 +56,10 @@ In this mode, the agent should launch first, then the simulator can connect to t
 ```bash
 cd baseline/DQN && python3 test_DQN.py cpu 5556
 # cd baseline/PPO && python3 test_PPO.py cpu 5556
+# cd baseline/PPO && python3 test_PPO.py port device
 
 cd examples && python3 launch_evaluation.py 5556
 ```
-
-### TODO List
-
-- [ ] Auto download ispd testcases
-- [ ] Support distributed routing on one server
 
 ### Acknowledgement
 

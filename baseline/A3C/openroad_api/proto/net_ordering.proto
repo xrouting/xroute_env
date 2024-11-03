@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package openroad_api.net_ordering;
+
+enum NodeType {
+  BLOCKAGE = 0;
+  NORMAL = 1;
+  ACCESS = 2;
+  NOT_EXIST = 3;
+}
+
+message Node {
+  // maze index
+  sint32 maze_x = 1;
+  sint32 maze_y = 2;
+  sint32 maze_z = 3;
+
+  // point coordinates
+  sint32 point_x = 4;
+  sint32 point_y = 5;
+  sint32 point_z = 6;
+
+  // node details
+  NodeType type = 7;
+  bool is_used = 8; // sets to true if the node is used by a net or is a blockage.
+  sint32 net = 9; // starts from 0, -1 means not belongs to a net.
+  sint32 pin = 10; // ditto.
+}
+
+message Request {
+  // dimensions of the maze
+  uint32 dim_x = 1;
+  uint32 dim_y = 2;
+  uint32 dim_z = 3;
+
+  repeated Node nodes = 4;
+
+  uint32 reward_violation = 5;
+  uint32 reward_wire_length = 6;
+  uint32 reward_via = 7;
+
+  bool is_done = 8; // indicates if the drworker has finished routing all nets that need to be routed.
+
+  // the indexes of nets that need to be routed.
+  repeated uint32 nets = 9;
+
+  // for verification of Lin's algorithm
+  repeated sint32 openroad = 10;
+  repeated sint32 xroute = 11;
+  string count_map = 12;
+  string metrics_delta = 13;
+}
+
+message Response {
+  sint32 net_index = 1; // the index of the net that is to be routed, -1 when outer thinks it has done routing.
+  repeated uint32 net_list = 2;
+}
+
+message Message {
+  oneof wrapper {
+    Request request = 1;
+    Response response = 2;
+  }
+}
