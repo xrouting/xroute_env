@@ -9,7 +9,7 @@ To interact with the xroute environment, you need to download the simulator firs
 
 | Operating System | Download Link |
 | --- | --- |
-| Ubuntu 22.04 | [Download](https://drive.google.com/file/d/1-Zxd0HiOHclNtwCON5wOM78eCzsPrOBB/view?usp=sharing) |
+| Ubuntu 22.04 | [Download](https://drive.google.com/file/d/1tgyXDrM5VqEHoo_SFlUhy5d8vAQdh5SX/view?usp=drive_link) |
 
 Then, put the simulator in the `third_party/openroad` folder.
 
@@ -56,7 +56,7 @@ In this mode, the agent should launch first, then the simulator can connect to t
 ```bash
 cd baseline/DQN && python3 test_DQN.py cpu 5556
 # cd baseline/PPO && python3 test_PPO.py cpu 5556
-# cd baseline/PPO && python3 test_PPO.py port device
+# cd baseline/A3C && python3 test_A3C.py 5556 cpu
 
 cd examples && python3 launch_evaluation.py 5556
 ```
