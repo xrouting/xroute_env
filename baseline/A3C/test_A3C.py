@@ -64,7 +64,7 @@ if __name__ == '__main__':
     try:
         pretrained_path = sys.argv[3]
     except Exception as e:
-        pretrained_path = '/home/dengqiyuan/XRoute/baseline/A3C/episode_train_8000/2023-07-14--10-18-25/A3C_routing.pth'
+        pretrained_path = './episode_train_8000/2023-07-14--10-18-25/A3C_routing.pth'
     print(f'port:{port},device:{device}')
     server = InferenceSelfPlay(checkpoint_path=pretrained_path,port=port,device=device)
     server.response_action()  
